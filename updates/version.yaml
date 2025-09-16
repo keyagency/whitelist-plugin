@@ -1,0 +1,4 @@
+v1.0.0:
+    - Initialize plugin.
+    - Added backend IP whitelist functionality with support for IPv4 and IPv6 addresses and CIDR ranges.
+v1.0.1: Improved IP detection for load balancers and proxy servers.

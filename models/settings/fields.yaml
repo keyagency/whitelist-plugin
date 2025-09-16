@@ -1,0 +1,67 @@
+tabs:
+    fields:
+        whitelist_enabled:
+            span: full
+            label: Enable IP Whitelist
+            comment: Enable or disable IP whitelist protection for the backend
+            type: switch
+            default: 0
+            tab: General
+
+        allowed_ips:
+            span: full
+            label: Allowed IP Addresses
+            comment: "Enter IP addresses and CIDR ranges (one per line). Example: 192.168.1.1 or 192.168.1.0/24"
+            type: codeeditor
+            language: text
+            size: large
+            tab: General
+
+        block_message:
+            span: full
+            label: Block Message
+            comment: Message displayed to blocked users
+            type: text
+            default: "Access denied. Your IP address is not authorized to access this area."
+            tab: General
+
+        protect_entire_site:
+            span: full
+            label: Protect Entire Site
+            comment: Apply whitelist to the entire website, not just the backend
+            type: switch
+            default: 0
+            tab: General
+
+        allow_localhost:
+            span: full
+            label: Always Allow Localhost
+            comment: Always allow access from localhost (127.0.0.1, ::1) even when whitelist is enabled
+            type: switch
+            default: 1
+            tab: General
+
+        log_blocked_attempts:
+            span: full
+            label: Log Blocked Attempts
+            comment: Log blocked access attempts for security monitoring
+            type: switch
+            default: 1
+            tab: General
+
+        help_section:
+            span: full
+            type: section
+            tab: Help
+
+        ip_format_help:
+            span: full
+            label: IP Address Formats
+            comment: |
+                Supported formats -
+                Single IP (192.168.1.100), IPv4 CIDR (192.168.1.0/24),
+                IPv6 (2001-db8--1), IPv6 CIDR (2001-db8--/32).
+                Leave empty to allow all IPs when whitelist is enabled.
+            type: partial
+            path: ~/plugins/key/whitelist/partials/_help.htm
+            tab: Help

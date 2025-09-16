@@ -1,0 +1,69 @@
+<div class="callout callout-info">
+    <div class="content">
+        <h3>IP Address Format Examples</h3>
+        <ul>
+            <li><strong>Single IPv4:</strong> <code>192.168.1.100</code></li>
+            <li><strong>IPv4 Range:</strong> <code>192.168.1.0/24</code> (allows 192.168.1.1 to 192.168.1.254)</li>
+            <li><strong>Single IPv6:</strong> <code>2001:db8::1</code></li>
+            <li><strong>IPv6 Range:</strong> <code>2001:db8::/32</code></li>
+        </ul>
+
+        <h3>New Features</h3>
+        <ul>
+            <li><strong>Entire Site Protection:</strong> Option to protect the entire website, not just backend</li>
+            <li><strong>Plugin State Awareness:</strong> Automatically disables when plugin is deactivated</li>
+            <li><strong>Localhost Protection:</strong> Always allows localhost (127.0.0.1, ::1) by default</li>
+            <li><strong>Proxy Support:</strong> Detects real client IPs behind load balancers and proxies</li>
+            <li><strong>Enhanced Logging:</strong> Comprehensive logging with client details and headers</li>
+        </ul>
+
+        <h3>Important Notes</h3>
+        <ul>
+            <li>Each IP address or range should be on a separate line</li>
+            <li>If whitelist is enabled but no IPs are configured, all access will be allowed</li>
+            <li>Localhost access (127.0.0.1, ::1) is allowed by default for development safety</li>
+            <li><strong>Entire Site Protection:</strong> When enabled, blocks ALL website access (frontend + backend) from non-whitelisted IPs</li>
+            <li>Plugin automatically stops blocking when disabled</li>
+            <li>Changes take effect immediately after saving</li>
+        </ul>
+
+        <h3>⚠️ Entire Site Protection Warning</h3>
+        <div class="callout callout-danger">
+            <p><strong>Use with extreme caution!</strong> When "Protect Entire Site" is enabled:</p>
+            <ul>
+                <li>ALL website visitors (frontend + backend) must be on the whitelist</li>
+                <li>Only use for staging sites, maintenance mode, or private websites</li>
+                <li>Can block legitimate users and search engines</li>
+                <li>Test thoroughly before enabling on production sites</li>
+            </ul>
+        </div>
+
+        <h3>Safety Features</h3>
+        <div class="callout callout-success">
+            <ul>
+                <li><strong>Development Safe:</strong> Localhost IPs are allowed by default</li>
+                <li><strong>Plugin Control:</strong> Disable plugin to instantly remove all restrictions</li>
+                <li><strong>Clear Feedback:</strong> Blocked users see their detected IP address</li>
+                <li><strong>Backend Only Default:</strong> Protects only backend by default</li>
+            </ul>
+        </div>
+
+        <h3>Testing</h3>
+        <p>Before enabling the whitelist in production:</p>
+        <ol>
+            <li>Add your current IP address to the list</li>
+            <li>Save the settings</li>
+            <li>Enable the whitelist</li>
+            <li>Test access from a different IP to ensure blocking works</li>
+            <li>Verify localhost access still works (if enabled)</li>
+        </ol>
+
+        <h3>Troubleshooting</h3>
+        <p>If locked out:</p>
+        <ol>
+            <li>Disable the plugin in Settings → System → Updates → Manage plugins</li>
+            <li>Or temporarily rename the plugin folder</li>
+            <li>Clear cache: <code>php artisan cache:clear</code></li>
+        </ol>
+    </div>
+</div>
