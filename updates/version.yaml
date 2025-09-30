@@ -1,4 +1,9 @@
 v1.0.0:
     - Initialize plugin.
     - Added backend IP whitelist functionality with support for IPv4 and IPv6 addresses and CIDR ranges.
-v1.0.1: Improved IP detection for load balancers and proxy servers.
+v1.0.1:
+    - Improved IP detection for load balancers and proxy servers.
+v1.0.2:
+    - Added role-based permissions for settings access.
+    - Added internationalization support with English, Dutch, German, and French translations.
+    - Migrated all translatable strings to language files.

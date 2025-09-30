@@ -26,6 +26,8 @@ A comprehensive security plugin for October CMS that restricts backend access to
 - **Real-time Feedback**: Blocked users see their detected IP address
 - **Development Friendly**: Safe defaults that won't lock developers out
 - **Instant Control**: Disable plugin to immediately remove all restrictions
+- **Multilingual Support**: Full internationalization with English, Dutch, German, and French translations
+- **Role-Based Access**: Permission-based settings access for enhanced security
 
 ## Installation
 
@@ -48,6 +50,7 @@ Navigate to **Settings → Security → IP Whitelist** in your backend:
 - **Enable IP Whitelist**: Master toggle for whitelist protection
 - **Allowed IP Addresses**: Multi-line input for IP addresses and CIDR ranges
 - **Block Message**: Custom message displayed to blocked users
+- **Protect Entire Site**: Apply whitelist to entire website (not just backend)
 - **Always Allow Localhost**: Safety feature for development environments
 - **Log Blocked Attempts**: Enable security event logging
 
@@ -58,6 +61,15 @@ Navigate to **Settings → Security → IP Whitelist** in your backend:
 - **Single IPv6**: `2001:db8::1`
 - **IPv6 CIDR Range**: `2001:db8::/32`
 
+## Permissions & Access Control
+
+### Role-Based Permissions
+
+The plugin includes built-in permission controls:
+- **Access Settings Permission**: `key.whitelist.access_settings`
+- Restrict who can view and modify IP whitelist settings
+- Assign permissions via **Settings → Administrators → Manage Roles**
+
 ## Safety & Security
 
 ### Built-in Safety Features
@@ -66,6 +78,7 @@ Navigate to **Settings → Security → IP Whitelist** in your backend:
 - **Plugin Control**: Instant disable capability
 - **Clear Error Messages**: Users see their IP and helpful information
 - **Automatic Failsafe**: If no IPs configured, access is allowed
+- **Permission Protected**: Settings access controlled via role-based permissions
 
 ### Proxy Detection
 
@@ -97,12 +110,27 @@ Automatically detects real client IPs from these headers (in priority order):
 ### File Structure
 ```
 plugins/key/whitelist/
-├── Plugin.php                  # Main plugin registration & middleware
-├── middleware/WhitelistMiddleware.php  # IP validation logic
-├── models/Settings.php         # Settings with IP parsing & validation
-├── views/blocked.htm           # Professional error page
-└── updates/version.yaml        # Version tracking
+├── Plugin.php                           # Main plugin registration & middleware
+├── middleware/WhitelistMiddleware.php   # IP validation logic
+├── models/Settings.php                  # Settings with IP parsing & validation
+├── lang/                                # Internationalization files
+│   ├── en/lang.php                      # English translations
+│   ├── nl/lang.php                      # Dutch translations
+│   ├── de/lang.php                      # German translations
+│   └── fr/lang.php                      # French translations
+├── views/blocked.htm                    # Professional error page
+└── updates/version.yaml                 # Version tracking
 ```
+
+### Internationalization
+
+The plugin supports multiple languages:
+- **English** (en) - Default
+- **Dutch** (nl) - Nederlands
+- **German** (de) - Deutsch
+- **French** (fr) - Français
+
+All interface text, field labels, and help text are fully translatable.
 
 ### Requirements
 - October CMS 3.x
