@@ -18,7 +18,8 @@ class Plugin extends PluginBase
             'description' => 'key.whitelist::lang.plugin.description',
             'author'      => 'Key',
             'icon'        => 'icon-shield',
-            'homepage'    => ''
+            'homepage'    => '',
+            'version'     => '1.0.3'
         ];
     }
 
