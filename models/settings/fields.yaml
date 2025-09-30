@@ -61,3 +61,15 @@ tabs:
             type: partial
             path: ~/plugins/key/whitelist/partials/_help.htm
             tab: key.whitelist::lang.tabs.help
+
+        release_notes_section:
+            span: full
+            type: section
+            tab: key.whitelist::lang.tabs.release_notes
+
+        release_notes_content:
+            span: full
+            label: key.whitelist::lang.fields.release_notes.label
+            type: partial
+            path: ~/plugins/key/whitelist/partials/_release_notes.htm
+            tab: key.whitelist::lang.tabs.release_notes

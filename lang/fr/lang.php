@@ -43,9 +43,13 @@ return [
             'label' => 'Formats d\'adresse IP',
             'comment' => 'Formats supportés - IP unique (192.168.1.100), IPv4 CIDR (192.168.1.0/24), IPv6 (2001:db8::1), IPv6 CIDR (2001:db8::/32). Laisser vide pour autoriser toutes les IPs lorsque la liste blanche est activée.',
         ],
+        'release_notes' => [
+            'label' => 'Notes de version',
+        ],
     ],
     'tabs' => [
         'general' => 'Général',
         'help' => 'Aide',
+        'release_notes' => 'Notes de version',
     ],
 ];

@@ -43,9 +43,13 @@ return [
             'label' => 'IP Address Formats',
             'comment' => 'Supported formats - Single IP (192.168.1.100), IPv4 CIDR (192.168.1.0/24), IPv6 (2001:db8::1), IPv6 CIDR (2001:db8::/32). Leave empty to allow all IPs when whitelist is enabled.',
         ],
+        'release_notes' => [
+            'label' => 'Release Notes',
+        ],
     ],
     'tabs' => [
         'general' => 'General',
         'help' => 'Help',
+        'release_notes' => 'Release Notes',
     ],
 ];
