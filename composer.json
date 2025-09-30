@@ -1,5 +1,5 @@
 {
-    "name": "keyagency/whitelist-plugin",
+    "name": "key/whitelist-plugin",
     "description": "This plugin adds whitelist functionality to OctoberCMS.",
     "type": "october-plugin",
     "license": "MIT",
