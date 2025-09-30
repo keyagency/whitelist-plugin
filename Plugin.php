@@ -1,8 +1,6 @@
 <?php namespace Key\Whitelist;
 
-use Backend;
 use System\Classes\PluginBase;
-use System\Classes\SettingsManager;
 use Key\Whitelist\Middleware\WhitelistMiddleware;
 
 /**
@@ -16,11 +14,24 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Backend IP Whitelist',
-            'description' => 'Restricts backend access to whitelisted IP addresses and ranges.',
+            'name'        => 'key.whitelist::lang.plugin.name',
+            'description' => 'key.whitelist::lang.plugin.description',
             'author'      => 'Key',
             'icon'        => 'icon-shield',
             'homepage'    => ''
+        ];
+    }
+
+    /**
+     * Register plugin permissions
+     */
+    public function registerPermissions()
+    {
+        return [
+            'key.whitelist.access_settings' => [
+                'tab'   => 'key.whitelist::lang.settings.label',
+                'label' => 'key.whitelist::lang.permissions.access_settings'
+            ]
         ];
     }
 
@@ -31,13 +42,14 @@ class Plugin extends PluginBase
     {
         return [
             'settings' => [
-                'label'       => 'IP Whitelist',
-                'description' => 'Configure IP addresses and ranges allowed to access the backend.',
+                'label'       => 'key.whitelist::lang.settings.label',
+                'description' => 'key.whitelist::lang.settings.description',
                 'category'    => 'Security',
                 'icon'        => 'icon-shield',
                 'class'       => 'Key\Whitelist\Models\Settings',
                 'order'       => 500,
-                'keywords'    => 'security ip whitelist backend access'
+                'keywords'    => 'key.whitelist::lang.settings.keywords',
+                'permissions' => ['key.whitelist.access_settings']
             ]
         ];
     }

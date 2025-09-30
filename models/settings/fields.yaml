@@ -2,66 +2,62 @@ tabs:
     fields:
         whitelist_enabled:
             span: full
-            label: Enable IP Whitelist
-            comment: Enable or disable IP whitelist protection for the backend
+            label: key.whitelist::lang.fields.whitelist_enabled.label
+            comment: key.whitelist::lang.fields.whitelist_enabled.comment
             type: switch
             default: 0
-            tab: General
+            tab: key.whitelist::lang.tabs.general
 
         allowed_ips:
             span: full
-            label: Allowed IP Addresses
-            comment: "Enter IP addresses and CIDR ranges (one per line). Example: 192.168.1.1 or 192.168.1.0/24"
+            label: key.whitelist::lang.fields.allowed_ips.label
+            comment: key.whitelist::lang.fields.allowed_ips.comment
             type: codeeditor
             language: text
             size: large
-            tab: General
+            tab: key.whitelist::lang.tabs.general
 
         block_message:
             span: full
-            label: Block Message
-            comment: Message displayed to blocked users
+            label: key.whitelist::lang.fields.block_message.label
+            comment: key.whitelist::lang.fields.block_message.comment
             type: text
-            default: "Access denied. Your IP address is not authorized to access this area."
-            tab: General
+            default: key.whitelist::lang.fields.block_message.default
+            tab: key.whitelist::lang.tabs.general
 
         protect_entire_site:
             span: full
-            label: Protect Entire Site
-            comment: Apply whitelist to the entire website, not just the backend
+            label: key.whitelist::lang.fields.protect_entire_site.label
+            comment: key.whitelist::lang.fields.protect_entire_site.comment
             type: switch
             default: 0
-            tab: General
+            tab: key.whitelist::lang.tabs.general
 
         allow_localhost:
             span: full
-            label: Always Allow Localhost
-            comment: Always allow access from localhost (127.0.0.1, ::1) even when whitelist is enabled
+            label: key.whitelist::lang.fields.allow_localhost.label
+            comment: key.whitelist::lang.fields.allow_localhost.comment
             type: switch
             default: 1
-            tab: General
+            tab: key.whitelist::lang.tabs.general
 
         log_blocked_attempts:
             span: full
-            label: Log Blocked Attempts
-            comment: Log blocked access attempts for security monitoring
+            label: key.whitelist::lang.fields.log_blocked_attempts.label
+            comment: key.whitelist::lang.fields.log_blocked_attempts.comment
             type: switch
             default: 1
-            tab: General
+            tab: key.whitelist::lang.tabs.general
 
         help_section:
             span: full
             type: section
-            tab: Help
+            tab: key.whitelist::lang.tabs.help
 
         ip_format_help:
             span: full
-            label: IP Address Formats
-            comment: |
-                Supported formats -
-                Single IP (192.168.1.100), IPv4 CIDR (192.168.1.0/24),
-                IPv6 (2001-db8--1), IPv6 CIDR (2001-db8--/32).
-                Leave empty to allow all IPs when whitelist is enabled.
+            label: key.whitelist::lang.fields.ip_format_help.label
+            comment: key.whitelist::lang.fields.ip_format_help.comment
             type: partial
             path: ~/plugins/key/whitelist/partials/_help.htm
-            tab: Help
+            tab: key.whitelist::lang.tabs.help
