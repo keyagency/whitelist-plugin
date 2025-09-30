@@ -7,3 +7,6 @@ v1.0.2:
     - Added role-based permissions for settings access.
     - Added internationalization support with English, Dutch, German, and French translations.
     - Migrated all translatable strings to language files.
+v1.0.3:
+    - Added Release Notes tab to settings page with full version history.
+    - Enhanced documentation with upcoming features section.

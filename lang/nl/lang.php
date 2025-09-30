@@ -43,9 +43,13 @@ return [
             'label' => 'IP-adres Formaten',
             'comment' => 'Ondersteunde formaten - Enkel IP (192.168.1.100), IPv4 CIDR (192.168.1.0/24), IPv6 (2001:db8::1), IPv6 CIDR (2001:db8::/32). Laat leeg om alle IP-adressen toe te staan wanneer whitelist is ingeschakeld.',
         ],
+        'release_notes' => [
+            'label' => 'Release Notes',
+        ],
     ],
     'tabs' => [
         'general' => 'Algemeen',
         'help' => 'Hulp',
+        'release_notes' => 'Release Notes',
     ],
 ];

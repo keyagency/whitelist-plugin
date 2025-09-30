@@ -43,9 +43,13 @@ return [
             'label' => 'IP-Adressformate',
             'comment' => 'Unterstützte Formate - Einzelne IP (192.168.1.100), IPv4 CIDR (192.168.1.0/24), IPv6 (2001:db8::1), IPv6 CIDR (2001:db8::/32). Leer lassen, um alle IPs zuzulassen, wenn Whitelist aktiviert ist.',
         ],
+        'release_notes' => [
+            'label' => 'Versionshinweise',
+        ],
     ],
     'tabs' => [
         'general' => 'Allgemein',
         'help' => 'Hilfe',
+        'release_notes' => 'Versionshinweise',
     ],
 ];
