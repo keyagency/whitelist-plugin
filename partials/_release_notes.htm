@@ -2,6 +2,22 @@
     <div class="content">
         <h3>Version History</h3>
 
+        <h4>Version 1.1.0 - 2025-01-XX</h4>
+        <ul>
+            <li><strong>🚨 New: Emergency Access System</strong></li>
+            <li>Email-based emergency access recovery when locked out</li>
+            <li>Token-based security with configurable expiration</li>
+            <li>Manual or automatic approval modes</li>
+            <li>Multi-admin email support</li>
+            <li>Discreet access request button with customizable text</li>
+            <li>Automatic token cleanup (daily scheduled task)</li>
+            <li>Database table for tracking access requests</li>
+            <li>HTML and plain text email templates</li>
+            <li>Full internationalization for emergency access features</li>
+            <li>Spam prevention with duplicate request blocking</li>
+            <li>Console command: <code>php artisan whitelist:cleanup-tokens</code></li>
+        </ul>
+
         <h4>Version 1.0.3 - 2024-01-XX</h4>
         <ul>
             <li>Added Release Notes tab to settings page</li>
@@ -38,6 +54,7 @@
 
         <h3>Features</h3>
         <ul>
+            <li><strong>🚨 Emergency Access:</strong> Email-based recovery system with token security</li>
             <li><strong>Flexible Protection:</strong> Choose between backend-only or entire site protection</li>
             <li><strong>IP Format Support:</strong> Single IPs, IPv4/IPv6, and CIDR ranges</li>
             <li><strong>Development Friendly:</strong> Automatic localhost access for safe testing</li>
@@ -47,13 +64,20 @@
             <li><strong>Permission Controls:</strong> Role-based access to settings</li>
         </ul>
 
+        <h3>Documentation</h3>
+        <ul>
+            <li><strong>README.md:</strong> Complete plugin documentation and setup guide</li>
+            <li><strong>EMERGENCY_ACCESS.md:</strong> Detailed emergency access feature documentation</li>
+            <li><strong>CLAUDE.md:</strong> Developer guidance for Claude Code assistant</li>
+        </ul>
+
         <h3>Upcoming Features</h3>
         <ul>
             <li>Scheduled whitelist changes</li>
             <li>IP groups and templates</li>
             <li>Advanced logging with search and filtering</li>
-            <li>Email notifications for blocked attempts</li>
             <li>Integration with October CMS user system</li>
+            <li>Two-factor authentication for emergency access</li>
         </ul>
     </div>
 </div>

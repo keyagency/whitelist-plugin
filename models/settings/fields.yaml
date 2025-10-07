@@ -49,6 +49,67 @@ tabs:
             default: 1
             tab: key.whitelist::lang.tabs.general
 
+        emergency_access_section:
+            span: full
+            type: section
+            tab: key.whitelist::lang.tabs.emergency_access
+
+        enable_emergency_access:
+            span: full
+            label: key.whitelist::lang.fields.enable_emergency_access.label
+            comment: key.whitelist::lang.fields.enable_emergency_access.comment
+            type: switch
+            default: 0
+            tab: key.whitelist::lang.tabs.emergency_access
+
+        emergency_access_emails:
+            span: full
+            label: key.whitelist::lang.fields.emergency_access_emails.label
+            comment: key.whitelist::lang.fields.emergency_access_emails.comment
+            type: textarea
+            size: small
+            tab: key.whitelist::lang.tabs.emergency_access
+            trigger:
+                action: show
+                field: enable_emergency_access
+                condition: checked
+
+        access_token_duration:
+            span: left
+            label: key.whitelist::lang.fields.access_token_duration.label
+            comment: key.whitelist::lang.fields.access_token_duration.comment
+            type: number
+            default: 24
+            tab: key.whitelist::lang.tabs.emergency_access
+            trigger:
+                action: show
+                field: enable_emergency_access
+                condition: checked
+
+        require_manual_approval:
+            span: right
+            label: key.whitelist::lang.fields.require_manual_approval.label
+            comment: key.whitelist::lang.fields.require_manual_approval.comment
+            type: switch
+            default: 1
+            tab: key.whitelist::lang.tabs.emergency_access
+            trigger:
+                action: show
+                field: enable_emergency_access
+                condition: checked
+
+        access_request_button_text:
+            span: full
+            label: key.whitelist::lang.fields.access_request_button_text.label
+            comment: key.whitelist::lang.fields.access_request_button_text.comment
+            type: text
+            default: key.whitelist::lang.fields.access_request_button_text.default
+            tab: key.whitelist::lang.tabs.emergency_access
+            trigger:
+                action: show
+                field: enable_emergency_access
+                condition: checked
+
         help_section:
             span: full
             type: section

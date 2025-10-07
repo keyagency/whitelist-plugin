@@ -46,10 +46,44 @@ return [
         'release_notes' => [
             'label' => 'Release Notes',
         ],
+        'enable_emergency_access' => [
+            'label' => 'Enable Emergency Access',
+            'comment' => 'Allow blocked users to request temporary access via email',
+        ],
+        'emergency_access_emails' => [
+            'label' => 'Admin Email Addresses',
+            'comment' => 'Email addresses that will receive access requests (one per line)',
+        ],
+        'access_token_duration' => [
+            'label' => 'Token Duration (hours)',
+            'comment' => 'How long the access token remains valid',
+        ],
+        'require_manual_approval' => [
+            'label' => 'Require Manual Approval',
+            'comment' => 'Admin must click approval link. If disabled, IP is added automatically when request is made.',
+        ],
+        'access_request_button_text' => [
+            'label' => 'Access Request Button Text',
+            'comment' => 'Text shown on the access request button (keep discreet to avoid spam)',
+            'default' => 'Need access?',
+        ],
     ],
     'tabs' => [
         'general' => 'General',
+        'emergency_access' => 'Emergency Access',
         'help' => 'Help',
         'release_notes' => 'Release Notes',
+    ],
+    'emergency' => [
+        'request_sent_title' => 'Access Request Sent',
+        'request_sent_message' => 'Your access request has been sent to the administrator. If approved, you will be able to access the site from this IP address.',
+        'error_title' => 'Request Failed',
+        'error_disabled' => 'Emergency access is not enabled.',
+        'error_already_requested' => 'An access request for this IP address is already pending.',
+        'error_generic' => 'Unable to process your request. Please contact the administrator.',
+        'approved_title' => 'Access Granted',
+        'approved_message' => 'Your IP address has been whitelisted. You can now access the site.',
+        'token_expired' => 'This access token has expired.',
+        'token_invalid' => 'Invalid access token.',
     ],
 ];

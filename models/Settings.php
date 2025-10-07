@@ -1,6 +1,7 @@
 <?php namespace Key\Whitelist\Models;
 
 use October\Rain\Database\Model;
+use Cache;
 
 class Settings extends Model
 {
@@ -20,6 +21,14 @@ class Settings extends Model
         'allow_localhost' => ['boolean'],
         'log_blocked_attempts' => ['boolean']
     ];
+
+    /**
+     * After save event to clear cache
+     */
+    public function afterSave()
+    {
+        Cache::forget('key_whitelist_settings');
+    }
 
     /**
      * Parse and validate IP addresses and ranges

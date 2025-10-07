@@ -21,6 +21,14 @@ A comprehensive security plugin for October CMS that restricts backend access to
   - Standard load balancers
   - Various proxy configurations
 
+### 🚨 Emergency Access System
+- **Email-Based Recovery**: Request access when locked out via discreet link
+- **Token-Based Security**: Cryptographically secure, time-limited approval tokens
+- **Manual or Auto Approval**: Choose between admin approval or automatic whitelisting
+- **Multi-Admin Support**: Send notifications to multiple administrators
+- **Spam Prevention**: Customizable button text and duplicate request blocking
+- **Automatic Cleanup**: Expired tokens cleaned up daily
+
 ### 🎯 User Experience
 - **Easy Backend Interface**: Intuitive settings panel with comprehensive help
 - **Real-time Feedback**: Blocked users see their detected IP address
@@ -45,7 +53,7 @@ A comprehensive security plugin for October CMS that restricts backend access to
 
 Navigate to **Settings → Security → IP Whitelist** in your backend:
 
-### Settings Available
+### General Settings
 
 - **Enable IP Whitelist**: Master toggle for whitelist protection
 - **Allowed IP Addresses**: Multi-line input for IP addresses and CIDR ranges
@@ -53,6 +61,14 @@ Navigate to **Settings → Security → IP Whitelist** in your backend:
 - **Protect Entire Site**: Apply whitelist to entire website (not just backend)
 - **Always Allow Localhost**: Safety feature for development environments
 - **Log Blocked Attempts**: Enable security event logging
+
+### Emergency Access Settings
+
+- **Enable Emergency Access**: Allow blocked users to request access via email
+- **Admin Email Addresses**: Email addresses that receive access requests (one per line)
+- **Token Duration**: How long access tokens remain valid (in hours)
+- **Require Manual Approval**: Admin must click approval link (recommended for security)
+- **Access Request Button Text**: Customize the button text (keep discreet to prevent spam)
 
 ### Supported IP Formats
 
@@ -93,9 +109,29 @@ Automatically detects real client IPs from these headers (in priority order):
 
 ### Locked Out?
 
-1. **Method 1**: Disable plugin in Settings → System → Updates → Manage plugins
-2. **Method 2**: Temporarily rename the plugin folder
-3. **Method 3**: Clear cache: `php artisan cache:clear`
+#### Quick Recovery Options
+
+1. **Method 1 - Emergency Access** (Recommended):
+   - If emergency access is enabled, click the discreet "Need access?" link on the blocked page
+   - Admin receives email with approval link
+   - Click approval link to whitelist your IP
+
+2. **Method 2 - Plugin Disable**:
+   - Disable plugin in Settings → System → Updates → Manage plugins
+
+3. **Method 3 - File System**:
+   - Temporarily rename the plugin folder
+
+4. **Method 4 - Cache Clear**:
+   - Run: `php artisan cache:clear`
+
+#### Emergency Access Not Working?
+
+- Verify emergency access is enabled in settings
+- Check admin email addresses are configured
+- Look in spam folder for approval emails
+- Verify October CMS mail configuration is working
+- Check database for pending requests: `key_whitelist_emergency_access` table
 
 ### Testing Checklist
 
@@ -110,16 +146,28 @@ Automatically detects real client IPs from these headers (in priority order):
 ### File Structure
 ```
 plugins/key/whitelist/
-├── Plugin.php                           # Main plugin registration & middleware
-├── middleware/WhitelistMiddleware.php   # IP validation logic
-├── models/Settings.php                  # Settings with IP parsing & validation
-├── lang/                                # Internationalization files
-│   ├── en/lang.php                      # English translations
-│   ├── nl/lang.php                      # Dutch translations
-│   ├── de/lang.php                      # German translations
-│   └── fr/lang.php                      # French translations
-├── views/blocked.htm                    # Professional error page
-└── updates/version.yaml                 # Version tracking
+├── Plugin.php                                # Main plugin registration & routes
+├── middleware/WhitelistMiddleware.php        # IP validation & emergency access check
+├── controllers/EmergencyAccess.php           # Emergency access request handler
+├── models/
+│   ├── Settings.php                          # Settings with IP parsing & validation
+│   └── EmergencyAccess.php                   # Emergency access request model
+├── console/CleanupExpiredTokens.php          # Artisan command for token cleanup
+├── lang/                                     # Internationalization files
+│   ├── en/lang.php                           # English translations
+│   ├── nl/lang.php                           # Dutch translations
+│   ├── de/lang.php                           # German translations
+│   └── fr/lang.php                           # French translations
+├── views/
+│   ├── blocked.htm                           # Professional error page
+│   └── mail/
+│       ├── emergency_access_request.htm      # HTML email template
+│       └── emergency_access_request.txt      # Plain text email template
+├── updates/
+│   ├── version.yaml                          # Version tracking
+│   └── create_emergency_access_table.php     # Emergency access database migration
+├── EMERGENCY_ACCESS.md                       # Complete emergency access documentation
+└── README.md                                 # This file
 ```
 
 ### Internationalization
@@ -132,10 +180,30 @@ The plugin supports multiple languages:
 
 All interface text, field labels, and help text are fully translatable.
 
+### Console Commands
+
+```bash
+# Clean up expired emergency access tokens (runs daily at 3am automatically)
+php artisan whitelist:cleanup-tokens
+```
+
+### Routes
+
+The plugin registers the following public routes for emergency access:
+
+- `GET /whitelist/emergency-access/request` - Create access request
+- `GET /whitelist/emergency-access/approve/{token}` - Approve request via token
+
 ### Requirements
 - October CMS 3.x
 - PHP 8.2+
 - Laravel 9.x
+- Configured mail settings (for emergency access emails)
+
+## Additional Documentation
+
+- **[EMERGENCY_ACCESS.md](EMERGENCY_ACCESS.md)** - Complete emergency access feature documentation
+- **[CLAUDE.md](CLAUDE.md)** - Developer guidance for Claude Code assistant
 
 ## Credits
 

@@ -10,3 +10,19 @@ v1.0.2:
 v1.0.3:
     - Added Release Notes tab to settings page with full version history.
     - Enhanced documentation with upcoming features section.
+v1.1.0:
+    - Added emergency access system for IP whitelist recovery when locked out.
+    - Added EmergencyAccess model and controller for request handling.
+    - Added email notification system with HTML and plain text templates.
+    - Added token-based security with configurable expiration (default 24 hours).
+    - Added manual or automatic approval modes for access requests.
+    - Added discreet access request button with customizable text.
+    - Added console command 'whitelist:cleanup-tokens' for expired token cleanup.
+    - Added scheduled task for daily automatic token cleanup at 3am.
+    - Added spam prevention with duplicate request blocking.
+    - Added emergency access routes (/whitelist/emergency-access/request and /approve).
+    - Added Emergency Access tab to settings page.
+    - Updated all language files (en, nl, de, fr) with emergency access translations.
+    - Updated blocked view to conditionally show emergency access button.
+    - Updated middleware to check for approved emergency access tokens.
+    - create_emergency_access_table.php

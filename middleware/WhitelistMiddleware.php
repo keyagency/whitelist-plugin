@@ -2,6 +2,7 @@
 
 use Closure;
 use Key\Whitelist\Models\Settings;
+use Key\Whitelist\Models\EmergencyAccess;
 use Illuminate\Http\Request;
 use Log;
 use Config;
@@ -26,7 +27,8 @@ class WhitelistMiddleware
 
         if (!$protectEntireSite) {
             // Only apply to backend routes if entire site protection is disabled
-            $backendUri = Config::get('cms.backendUri', '/backend');
+            // Try environment variable first, then config, then default
+            $backendUri = env('BACKEND_URI') ?: Config::get('cms.backendUri', '/backend');
             $requestPath = '/' . ltrim($request->getPathInfo(), '/');
 
             if (strpos($requestPath, $backendUri) !== 0) {
@@ -42,6 +44,11 @@ class WhitelistMiddleware
         // Get client IP address
         $clientIp = $this->getClientIpAddress($request);
 
+        // Check if IP has approved emergency access
+        if (EmergencyAccess::hasApprovedAccess($clientIp)) {
+            return $next($request);
+        }
+
         // Check if IP is whitelisted
         if (!$settings->isIpWhitelisted($clientIp)) {
             // Log blocked attempt if enabled
@@ -55,9 +62,19 @@ class WhitelistMiddleware
             // Return custom error response
             $message = $settings->get('block_message', 'Access denied. Your IP address is not authorized to access this area.');
 
+            // Prepare emergency access data
+            // Only show button if emergency access is enabled AND there's no pending request
+            $showEmergencyAccess = $settings->get('enable_emergency_access', false)
+                && !EmergencyAccess::hasPendingRequest($clientIp);
+            $emergencyAccessText = $settings->get('access_request_button_text', 'Need access?');
+            $emergencyAccessUrl = url('/whitelist/emergency-access/request');
+
             return response()->view('key.whitelist::blocked', [
                 'message' => $message,
-                'ip' => $clientIp
+                'ip' => $clientIp,
+                'showEmergencyAccess' => $showEmergencyAccess,
+                'emergencyAccessText' => $emergencyAccessText,
+                'emergencyAccessUrl' => $emergencyAccessUrl,
             ], 403);
         }
 

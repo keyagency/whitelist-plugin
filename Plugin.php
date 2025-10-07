@@ -2,6 +2,7 @@
 
 use System\Classes\PluginBase;
 use Key\Whitelist\Middleware\WhitelistMiddleware;
+use Route;
 
 /**
  * Backend IP Whitelist Plugin
@@ -19,7 +20,7 @@ class Plugin extends PluginBase
             'author'      => 'Key',
             'icon'        => 'icon-shield',
             'homepage'    => 'https://keyagency.nl',
-            'version'     => '1.0.3'
+            'version'     => '1.1.0'
         ];
     }
 
@@ -56,11 +57,42 @@ class Plugin extends PluginBase
     }
 
     /**
+     * Register scheduled tasks
+     */
+    public function registerSchedule($schedule)
+    {
+        // Run token cleanup daily at 3am
+        $schedule->command('whitelist:cleanup-tokens')->dailyAt('03:00');
+    }
+
+    /**
+     * Register console commands
+     */
+    public function register()
+    {
+        $this->registerConsoleCommand('whitelist:cleanup-tokens', \Key\Whitelist\Console\CleanupExpiredTokens::class);
+    }
+
+    /**
      * Boot method, called right before the request route.
      */
     public function boot()
     {
         // Apply middleware to all requests, but filter inside middleware
         $this->app['router']->pushMiddlewareToGroup('web', WhitelistMiddleware::class);
+
+        // Register emergency access routes
+        $this->registerEmergencyAccessRoutes();
+    }
+
+    /**
+     * Register emergency access routes
+     */
+    protected function registerEmergencyAccessRoutes()
+    {
+        Route::group(['prefix' => 'whitelist/emergency-access'], function () {
+            Route::get('request', 'Key\Whitelist\Controllers\EmergencyAccess@request');
+            Route::get('approve/{token}', 'Key\Whitelist\Controllers\EmergencyAccess@approve');
+        });
     }
 }

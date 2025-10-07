@@ -46,10 +46,44 @@ return [
         'release_notes' => [
             'label' => 'Versionshinweise',
         ],
+        'enable_emergency_access' => [
+            'label' => 'Notfallzugriff aktivieren',
+            'comment' => 'Erlauben Sie blockierten Benutzern, temporären Zugriff per E-Mail anzufordern',
+        ],
+        'emergency_access_emails' => [
+            'label' => 'Administrator-E-Mail-Adressen',
+            'comment' => 'E-Mail-Adressen, die Zugriffsanfragen erhalten (eine pro Zeile)',
+        ],
+        'access_token_duration' => [
+            'label' => 'Token-Dauer (Stunden)',
+            'comment' => 'Wie lange das Zugangstoken gültig bleibt',
+        ],
+        'require_manual_approval' => [
+            'label' => 'Manuelle Genehmigung erforderlich',
+            'comment' => 'Administrator muss auf Genehmigungslink klicken. Falls deaktiviert, wird die IP automatisch bei Anfrage hinzugefügt.',
+        ],
+        'access_request_button_text' => [
+            'label' => 'Zugriffsanfrage Button-Text',
+            'comment' => 'Text, der auf dem Zugriffsanfrage-Button angezeigt wird (diskret halten, um Spam zu vermeiden)',
+            'default' => 'Zugriff benötigt?',
+        ],
     ],
     'tabs' => [
         'general' => 'Allgemein',
+        'emergency_access' => 'Notfallzugriff',
         'help' => 'Hilfe',
         'release_notes' => 'Versionshinweise',
+    ],
+    'emergency' => [
+        'request_sent_title' => 'Zugriffsanfrage gesendet',
+        'request_sent_message' => 'Ihre Zugriffsanfrage wurde an den Administrator gesendet. Bei Genehmigung können Sie von dieser IP-Adresse auf die Website zugreifen.',
+        'error_title' => 'Anfrage fehlgeschlagen',
+        'error_disabled' => 'Notfallzugriff ist nicht aktiviert.',
+        'error_already_requested' => 'Eine Zugriffsanfrage für diese IP-Adresse ist bereits ausstehend.',
+        'error_generic' => 'Ihre Anfrage konnte nicht verarbeitet werden. Bitte kontaktieren Sie den Administrator.',
+        'approved_title' => 'Zugriff gewährt',
+        'approved_message' => 'Ihre IP-Adresse wurde zur Whitelist hinzugefügt. Sie können jetzt auf die Website zugreifen.',
+        'token_expired' => 'Dieses Zugangstoken ist abgelaufen.',
+        'token_invalid' => 'Ungültiges Zugangstoken.',
     ],
 ];

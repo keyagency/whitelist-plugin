@@ -46,10 +46,44 @@ return [
         'release_notes' => [
             'label' => 'Notes de version',
         ],
+        'enable_emergency_access' => [
+            'label' => 'Activer l\'accès d\'urgence',
+            'comment' => 'Permettre aux utilisateurs bloqués de demander un accès temporaire par e-mail',
+        ],
+        'emergency_access_emails' => [
+            'label' => 'Adresses e-mail des administrateurs',
+            'comment' => 'Adresses e-mail qui recevront les demandes d\'accès (une par ligne)',
+        ],
+        'access_token_duration' => [
+            'label' => 'Durée du jeton (heures)',
+            'comment' => 'Combien de temps le jeton d\'accès reste valide',
+        ],
+        'require_manual_approval' => [
+            'label' => 'Approbation manuelle requise',
+            'comment' => 'L\'administrateur doit cliquer sur le lien d\'approbation. Si désactivé, l\'IP est ajoutée automatiquement lors de la demande.',
+        ],
+        'access_request_button_text' => [
+            'label' => 'Texte du bouton de demande d\'accès',
+            'comment' => 'Texte affiché sur le bouton de demande d\'accès (restez discret pour éviter le spam)',
+            'default' => 'Besoin d\'accès?',
+        ],
     ],
     'tabs' => [
         'general' => 'Général',
+        'emergency_access' => 'Accès d\'urgence',
         'help' => 'Aide',
         'release_notes' => 'Notes de version',
+    ],
+    'emergency' => [
+        'request_sent_title' => 'Demande d\'accès envoyée',
+        'request_sent_message' => 'Votre demande d\'accès a été envoyée à l\'administrateur. Si elle est approuvée, vous pourrez accéder au site depuis cette adresse IP.',
+        'error_title' => 'Demande échouée',
+        'error_disabled' => 'L\'accès d\'urgence n\'est pas activé.',
+        'error_already_requested' => 'Une demande d\'accès pour cette adresse IP est déjà en attente.',
+        'error_generic' => 'Impossible de traiter votre demande. Veuillez contacter l\'administrateur.',
+        'approved_title' => 'Accès accordé',
+        'approved_message' => 'Votre adresse IP a été ajoutée à la liste blanche. Vous pouvez maintenant accéder au site.',
+        'token_expired' => 'Ce jeton d\'accès a expiré.',
+        'token_invalid' => 'Jeton d\'accès invalide.',
     ],
 ];

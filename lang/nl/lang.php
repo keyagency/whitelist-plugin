@@ -46,10 +46,44 @@ return [
         'release_notes' => [
             'label' => 'Release Notes',
         ],
+        'enable_emergency_access' => [
+            'label' => 'Noodtoegang Inschakelen',
+            'comment' => 'Sta geblokkeerde gebruikers toe om tijdelijke toegang aan te vragen via e-mail',
+        ],
+        'emergency_access_emails' => [
+            'label' => 'Beheerder E-mailadressen',
+            'comment' => 'E-mailadressen die toegangsverzoeken ontvangen (één per regel)',
+        ],
+        'access_token_duration' => [
+            'label' => 'Token Duur (uren)',
+            'comment' => 'Hoe lang het toegangstoken geldig blijft',
+        ],
+        'require_manual_approval' => [
+            'label' => 'Handmatige Goedkeuring Vereist',
+            'comment' => 'Beheerder moet op goedkeuringslink klikken. Indien uitgeschakeld, wordt IP automatisch toegevoegd bij het verzoek.',
+        ],
+        'access_request_button_text' => [
+            'label' => 'Toegangsverzoek Knoptekst',
+            'comment' => 'Tekst die wordt weergegeven op de toegangsverzoek knop (houd discreet om spam te voorkomen)',
+            'default' => 'Toegang nodig?',
+        ],
     ],
     'tabs' => [
         'general' => 'Algemeen',
+        'emergency_access' => 'Noodtoegang',
         'help' => 'Hulp',
         'release_notes' => 'Release Notes',
+    ],
+    'emergency' => [
+        'request_sent_title' => 'Toegangsverzoek Verzonden',
+        'request_sent_message' => 'Uw toegangsverzoek is verzonden naar de beheerder. Indien goedgekeurd, kunt u de site benaderen vanaf dit IP-adres.',
+        'error_title' => 'Verzoek Mislukt',
+        'error_disabled' => 'Noodtoegang is niet ingeschakeld.',
+        'error_already_requested' => 'Een toegangsverzoek voor dit IP-adres is al in behandeling.',
+        'error_generic' => 'Kan uw verzoek niet verwerken. Neem contact op met de beheerder.',
+        'approved_title' => 'Toegang Verleend',
+        'approved_message' => 'Uw IP-adres is op de whitelist geplaatst. U kunt nu toegang krijgen tot de site.',
+        'token_expired' => 'Dit toegangstoken is verlopen.',
+        'token_invalid' => 'Ongeldig toegangstoken.',
     ],
 ];

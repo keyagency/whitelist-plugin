@@ -1,0 +1,104 @@
+<style>
+    .container {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 30px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+    }
+    .header {
+        background: #dc3545;
+        color: white;
+        padding: 20px;
+        border-radius: 8px 8px 0 0;
+        margin: -30px -30px 30px -30px;
+    }
+    h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    .info-box {
+        background: #f8f9fa;
+        border-left: 4px solid #dc3545;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    .info-box strong {
+        display: block;
+        margin-bottom: 5px;
+        color: #dc3545;
+    }
+    .code {
+        font-family: "Courier New", monospace;
+        background: #f8f9fa;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+    .button {
+        display: inline-block;
+        background: #28a745;
+        color: white !important;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px 0;
+        font-weight: 600;
+    }
+    .button:hover {
+        background: #218838;
+    }
+    .footer {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+        font-size: 12px;
+        color: #6c757d;
+    }
+    .warning {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        color: #856404;
+    }
+</style>
+
+<div class="container">
+    <div class="header">
+        <h1>🛡️ Emergency Access Request</h1>
+    </div>
+
+    <p>A request for emergency access to the IP whitelist has been received.</p>
+
+    <div class="info-box">
+        <strong>IP Address:</strong>
+        <span class="code">{{ ip_address }}</span>
+
+        <strong style="margin-top: 10px;">Requested At:</strong>
+        {{ requested_at }}
+
+        <strong style="margin-top: 10px;">Token Expires:</strong>
+        {{ expires_at }}
+    </div>
+
+    <p>To approve this request and add the IP address to the whitelist, click the button below:</p>
+
+    <a href="{{ approval_url }}" class="button">✓ Approve Access Request</a>
+
+    <div class="warning">
+        <strong>⚠️ Security Notice</strong><br>
+        Only approve this request if you recognize this IP address and expect this access request.
+        Once approved, this IP will be permanently added to your whitelist.
+    </div>
+
+    <div class="footer">
+        <p>This is an automated message from your IP Whitelist security system.</p>
+        <p>If you did not expect this request, you can safely ignore this email and the request will expire automatically.</p>
+    </div>
+</div>

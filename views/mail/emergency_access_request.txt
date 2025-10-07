@@ -1,0 +1,20 @@
+Emergency Access Request - IP Whitelist
+========================================
+
+A request for emergency access to the IP whitelist has been received.
+
+IP Address: {{ ip_address }}
+Requested At: {{ requested_at }}
+Token Expires: {{ expires_at }}
+
+To approve this request and add the IP address to the whitelist, visit the following URL:
+
+{{ approval_url }}
+
+SECURITY NOTICE:
+Only approve this request if you recognize this IP address and expect this access request.
+Once approved, this IP will be permanently added to your whitelist.
+
+---
+This is an automated message from your IP Whitelist security system.
+If you did not expect this request, you can safely ignore this email and the request will expire automatically.
