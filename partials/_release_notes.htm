@@ -2,6 +2,11 @@
     <div class="content">
         <h3>Version History</h3>
 
+        <h4>Version 1.1.2 - 2026-11-24</h4>
+        <ul>
+            <li>Added a changelog to the README and corrected the release notes history</li>
+        </ul>
+
         <h4>Version 1.1.1 - 2026-11-24</h4>
         <ul>
             <li><strong>Security fix: client IP spoofing</strong></li>
@@ -10,6 +15,7 @@
             <li>The backend path check decodes the URL, so percent-encoded paths can no longer skip the whitelist</li>
             <li>Emergency access requests use the same client IP resolution</li>
             <li><em>Always Allow Localhost</em> is now off by default for new installations</li>
+            <li>Removed the <code>composer/installers</code> requirement; October CMS already includes it</li>
             <li><strong>Action:</strong> behind Cloudflare or a load balancer, add its addresses under Trusted Proxies</li>
         </ul>
 

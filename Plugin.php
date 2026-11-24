@@ -20,7 +20,7 @@ class Plugin extends PluginBase
             'author'      => 'Key',
             'icon'        => 'icon-shield',
             'homepage'    => 'https://keyagency.nl',
-            'version'     => '1.1.1'
+            'version'     => '1.1.2'
         ];
     }
 

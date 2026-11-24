@@ -201,12 +201,16 @@ The plugin registers the following public routes for emergency access:
 
 The full version history is in [`updates/version.yaml`](updates/version.yaml) and on the **Release Notes** tab of the plugin settings.
 
+### 1.1.2 (2026-11-24)
+- Added this changelog and corrected the release notes history (dates and 1.0.1/1.0.2 content).
+
 ### 1.1.1 (2026-11-24) - security release
 - Forwarding headers (CF-Connecting-IP, X-Real-IP, X-Forwarded-For, Client-IP) are no longer trusted by default, so the client IP can no longer be spoofed.
 - New **Trusted Proxies** setting: X-Forwarded-For is only read for requests from these addresses.
 - The backend path check decodes the URL, so percent-encoded paths (such as `/%62ackend`) can no longer skip the whitelist.
 - Emergency access requests use the same client IP resolution as the whitelist.
 - **Always Allow Localhost** is now off by default for new installations.
+- Removed the `composer/installers` requirement; October CMS already includes it.
 - **Upgrade note:** behind Cloudflare or a load balancer, add its addresses under Trusted Proxies. Existing settings are kept, so check whether Always Allow Localhost should stay on in production.
 
 ### 1.1.0 (2025-10-07)
