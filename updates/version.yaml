@@ -27,8 +27,8 @@ v1.1.0:
     - Updated middleware to check for approved emergency access tokens.
     - create_emergency_access_table.php
 v1.1.1:
-    - Security: forwarding headers (CF-Connecting-IP, X-Real-IP, X-Forwarded-For, Client-IP) are no longer trusted by default, so the client IP can no longer be spoofed.
+    - Forwarding headers (CF-Connecting-IP, X-Real-IP, X-Forwarded-For, Client-IP) are no longer trusted by default, so the client IP can no longer be spoofed.
     - Added Trusted Proxies setting; X-Forwarded-For is only read for requests from these addresses.
-    - Security: the backend path check now decodes the URL, so percent-encoded paths can no longer skip the whitelist.
+    - The backend path check now decodes the URL, so percent-encoded paths can no longer skip the whitelist.
     - Emergency access requests use the same client IP resolution as the whitelist.
     - Always Allow Localhost is now off by default for new installations.
