@@ -193,10 +193,37 @@ The plugin registers the following public routes for emergency access:
 - `GET /whitelist/emergency-access/approve/{token}` - Approve request via token
 
 ### Requirements
-- October CMS 3.x
+- October CMS 3.x or 4.x
 - PHP 8.2+
-- Laravel 9.x
 - Configured mail settings (for emergency access emails)
+
+## Changelog
+
+The full version history is in [`updates/version.yaml`](updates/version.yaml) and on the **Release Notes** tab of the plugin settings.
+
+### 1.1.1 (2026-11-24) - security release
+- Forwarding headers (CF-Connecting-IP, X-Real-IP, X-Forwarded-For, Client-IP) are no longer trusted by default, so the client IP can no longer be spoofed.
+- New **Trusted Proxies** setting: X-Forwarded-For is only read for requests from these addresses.
+- The backend path check decodes the URL, so percent-encoded paths (such as `/%62ackend`) can no longer skip the whitelist.
+- Emergency access requests use the same client IP resolution as the whitelist.
+- **Always Allow Localhost** is now off by default for new installations.
+- **Upgrade note:** behind Cloudflare or a load balancer, add its addresses under Trusted Proxies. Existing settings are kept, so check whether Always Allow Localhost should stay on in production.
+
+### 1.1.0 (2025-10-07)
+- Emergency access system for IP whitelist recovery when locked out: email requests, token-based approval (manual or automatic), configurable expiry, spam prevention and a daily token cleanup (`php artisan whitelist:cleanup-tokens`).
+
+### 1.0.3 (2025-09-30)
+- Release Notes tab on the settings page with the full version history.
+
+### 1.0.2 (2025-09-30)
+- Role-based permissions for settings access.
+- Translations for English, Dutch, German and French.
+
+### 1.0.1 (2025-09-16)
+- Improved IP detection for load balancers and proxy servers.
+
+### 1.0.0 (2025-09-16)
+- Initial release: backend IP whitelist with IPv4/IPv6 addresses and CIDR ranges.
 
 ## Additional Documentation
 

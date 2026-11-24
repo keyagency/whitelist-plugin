@@ -13,7 +13,7 @@
             <li><strong>Action:</strong> behind Cloudflare or a load balancer, add its addresses under Trusted Proxies</li>
         </ul>
 
-        <h4>Version 1.1.0 - 2025-01-XX</h4>
+        <h4>Version 1.1.0 - 2025-10-07</h4>
         <ul>
             <li><strong>🚨 New: Emergency Access System</strong></li>
             <li>Email-based emergency access recovery when locked out</li>
@@ -29,27 +29,24 @@
             <li>Console command: <code>php artisan whitelist:cleanup-tokens</code></li>
         </ul>
 
-        <h4>Version 1.0.3 - 2024-01-XX</h4>
+        <h4>Version 1.0.3 - 2025-09-30</h4>
         <ul>
             <li>Added Release Notes tab to settings page</li>
         </ul>
 
-        <h4>Version 1.0.2 - 2024-01-XX</h4>
-        <ul>
-            <li>Added German and French translations</li>
-            <li>Improved internationalization support</li>
-            <li>Enhanced documentation</li>
-        </ul>
-
-        <h4>Version 1.0.1 - 2024-01-XX</h4>
+        <h4>Version 1.0.2 - 2025-09-30</h4>
         <ul>
             <li>Added role-based permissions for settings access</li>
-            <li>Added internationalization (i18n) support</li>
-            <li>Added Dutch language translations</li>
-            <li>Improved security with permission controls</li>
+            <li>Added internationalization support with English, Dutch, German and French translations</li>
+            <li>Moved all translatable strings to language files</li>
         </ul>
 
-        <h4>Version 1.0.0 - 2024-01-XX</h4>
+        <h4>Version 1.0.1 - 2025-09-16</h4>
+        <ul>
+            <li>Improved IP detection for load balancers and proxy servers</li>
+        </ul>
+
+        <h4>Version 1.0.0 - 2025-09-16</h4>
         <ul>
             <li><strong>Initial Release</strong></li>
             <li>IP whitelist functionality for backend access control</li>
@@ -57,7 +54,6 @@
             <li>CIDR range support for both IPv4 and IPv6</li>
             <li>Option to protect entire site or backend only</li>
             <li>Localhost protection for development safety</li>
-            <li>Proxy and load balancer support (Cloudflare, Nginx, etc.)</li>
             <li>Enhanced logging for security monitoring</li>
             <li>Plugin state awareness (auto-disable when deactivated)</li>
             <li>Customizable block message</li>
@@ -68,9 +64,9 @@
             <li><strong>🚨 Emergency Access:</strong> Email-based recovery system with token security</li>
             <li><strong>Flexible Protection:</strong> Choose between backend-only or entire site protection</li>
             <li><strong>IP Format Support:</strong> Single IPs, IPv4/IPv6, and CIDR ranges</li>
-            <li><strong>Development Friendly:</strong> Automatic localhost access for safe testing</li>
+            <li><strong>Development Friendly:</strong> Optional localhost access for local testing</li>
             <li><strong>Security Logging:</strong> Track blocked access attempts</li>
-            <li><strong>Proxy Detection:</strong> Works behind Cloudflare, Nginx, and other proxies</li>
+            <li><strong>Trusted Proxies:</strong> Works behind Cloudflare, Nginx and load balancers without trusting spoofable headers</li>
             <li><strong>Multilingual:</strong> English, Dutch, German, and French support</li>
             <li><strong>Permission Controls:</strong> Role-based access to settings</li>
         </ul>
