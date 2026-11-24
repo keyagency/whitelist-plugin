@@ -14,12 +14,8 @@ A comprehensive security plugin for October CMS that restricts backend access to
 
 ### 🛡️ Advanced Protection
 - **Plugin State Awareness**: Automatically disables restrictions when plugin is deactivated
-- **Localhost Protection**: Always allows localhost access (127.0.0.1, ::1) by default for development safety
-- **Proxy & Load Balancer Support**: Intelligent detection of real client IPs behind:
-  - Cloudflare
-  - Nginx proxy servers
-  - Standard load balancers
-  - Various proxy configurations
+- **Localhost Option**: Optionally always allow localhost (127.0.0.1, ::1); off by default
+- **Proxy & Load Balancer Support**: Reads the real client IP from X-Forwarded-For only for requests from your own trusted proxies (Cloudflare, load balancers, reverse proxies), so the IP cannot be spoofed
 
 ### 🚨 Emergency Access System
 - **Email-Based Recovery**: Request access when locked out via discreet link
@@ -59,7 +55,8 @@ Navigate to **Settings → Security → IP Whitelist** in your backend:
 - **Allowed IP Addresses**: Multi-line input for IP addresses and CIDR ranges
 - **Block Message**: Custom message displayed to blocked users
 - **Protect Entire Site**: Apply whitelist to entire website (not just backend)
-- **Always Allow Localhost**: Safety feature for development environments
+- **Always Allow Localhost**: Allow 127.0.0.1 and ::1 (off by default; leave off when a proxy on the same server forwards requests)
+- **Trusted Proxies**: IPs or CIDR ranges of your own proxies, load balancers or CDN, one per line
 - **Log Blocked Attempts**: Enable security event logging
 
 ### Emergency Access Settings
@@ -90,20 +87,21 @@ The plugin includes built-in permission controls:
 
 ### Built-in Safety Features
 
-- **Development Safe**: Localhost IPs allowed by default
+- **Spoof-Proof Client IP**: Forwarding headers are ignored unless the request comes from a trusted proxy
 - **Plugin Control**: Instant disable capability
 - **Clear Error Messages**: Users see their IP and helpful information
 - **Automatic Failsafe**: If no IPs configured, access is allowed
 - **Permission Protected**: Settings access controlled via role-based permissions
 
-### Proxy Detection
+### Client IP Detection
 
-Automatically detects real client IPs from these headers (in priority order):
-- `HTTP_CF_CONNECTING_IP` (Cloudflare)
-- `HTTP_X_REAL_IP` (Nginx)
-- `HTTP_X_FORWARDED_FOR` (Standard)
-- `HTTP_CLIENT_IP` (Proxy)
-- `REMOTE_ADDR` (Direct)
+Headers such as `X-Forwarded-For`, `X-Real-IP` and `CF-Connecting-IP` are sent by the client and can be forged. The plugin therefore uses the connecting address (`Request::ip()`, which also honours your application's own TrustProxies configuration) by default.
+
+When the site runs behind Cloudflare, a load balancer or another reverse proxy, add the addresses of those proxies under **Trusted Proxies**. For requests from a trusted proxy, the plugin walks `X-Forwarded-For` from right to left and uses the first address that is not a trusted proxy.
+
+For Cloudflare, use the published ranges from https://www.cloudflare.com/ips/.
+
+The backend path is compared after URL decoding and per path segment, so `/%62ackend` or `//backend` cannot skip the check.
 
 ## Troubleshooting
 
@@ -139,7 +137,7 @@ Automatically detects real client IPs from these headers (in priority order):
 2. ✅ Save settings
 3. ✅ Enable whitelist
 4. ✅ Test from different IP/device
-5. ✅ Verify localhost still works
+5. ✅ Behind a proxy or CDN: add it under Trusted Proxies and check that the blocked page shows your real IP
 
 ## Technical Details
 

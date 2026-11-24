@@ -2,6 +2,17 @@
     <div class="content">
         <h3>Version History</h3>
 
+        <h4>Version 1.1.1 - 2026-11-24</h4>
+        <ul>
+            <li><strong>Security fix: client IP spoofing</strong></li>
+            <li>Forwarding headers (CF-Connecting-IP, X-Real-IP, X-Forwarded-For, Client-IP) are no longer trusted by default</li>
+            <li>New setting <em>Trusted Proxies</em>: X-Forwarded-For is only read for requests from these addresses</li>
+            <li>The backend path check decodes the URL, so percent-encoded paths can no longer skip the whitelist</li>
+            <li>Emergency access requests use the same client IP resolution</li>
+            <li><em>Always Allow Localhost</em> is now off by default for new installations</li>
+            <li><strong>Action:</strong> behind Cloudflare or a load balancer, add its addresses under Trusted Proxies</li>
+        </ul>
+
         <h4>Version 1.1.0 - 2025-01-XX</h4>
         <ul>
             <li><strong>🚨 New: Emergency Access System</strong></li>

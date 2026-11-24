@@ -33,7 +33,11 @@ return [
         ],
         'allow_localhost' => [
             'label' => 'Toujours autoriser localhost',
-            'comment' => 'Toujours autoriser l\'accès depuis localhost (127.0.0.1, ::1) même lorsque la liste blanche est activée',
+            'comment' => 'Toujours autoriser l\'accès depuis localhost (127.0.0.1, ::1) même lorsque la liste blanche est activée. Laissez désactivé si un proxy inverse ou un cache sur le même serveur transmet les requêtes.',
+        ],
+        'trusted_proxies' => [
+            'label' => 'Proxys de confiance',
+            'comment' => 'Adresses IP ou plages CIDR de vos propres proxys, répartiteurs de charge ou CDN (p. ex. les plages Cloudflare), une par ligne. L\'IP du client n\'est lue dans X-Forwarded-For que pour les requêtes provenant de ces adresses. Laissez vide si les visiteurs se connectent directement à ce serveur : les en-têtes de transfert sont alors ignorés, car n\'importe qui peut les définir.',
         ],
         'log_blocked_attempts' => [
             'label' => 'Journaliser les tentatives bloquées',

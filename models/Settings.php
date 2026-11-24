@@ -19,6 +19,7 @@ class Settings extends Model
         'block_message' => ['string'],
         'protect_entire_site' => ['boolean'],
         'allow_localhost' => ['boolean'],
+        'trusted_proxies' => ['nullable', 'string'],
         'log_blocked_attempts' => ['boolean']
     ];
 
@@ -35,19 +36,31 @@ class Settings extends Model
      */
     public function getWhitelistedIps()
     {
-        $allowedIps = $this->get('allowed_ips', '');
+        return $this->parseIpList($this->get('allowed_ips', ''));
+    }
 
-        if (empty($allowedIps)) {
+    /**
+     * getTrustedProxies returns the proxies (IPs or CIDR ranges) whose
+     * X-Forwarded-For header may be used to find the client IP.
+     */
+    public function getTrustedProxies(): array
+    {
+        return $this->parseIpList($this->get('trusted_proxies', ''));
+    }
+
+    /**
+     * parseIpList splits a newline-separated list and drops empty lines.
+     */
+    protected function parseIpList($value): array
+    {
+        if (empty($value)) {
             return [];
         }
 
-        // Split by newlines and filter empty lines
-        $ips = array_filter(
-            array_map('trim', explode("\n", $allowedIps)),
-            function($ip) { return !empty($ip); }
-        );
-
-        return $ips;
+        return array_values(array_filter(
+            array_map('trim', explode("\n", (string) $value)),
+            function ($ip) { return $ip !== ''; }
+        ));
     }
 
     /**
@@ -60,8 +73,8 @@ class Settings extends Model
         }
 
         // Allow localhost IPs if setting is enabled
-        if ($this->get('allow_localhost', true)) {
-            $localhostIps = ['127.0.0.1', '::1', 'localhost'];
+        if ($this->get('allow_localhost', false)) {
+            $localhostIps = ['127.0.0.1', '::1'];
             if (in_array($ip, $localhostIps)) {
                 return true;
             }
@@ -85,8 +98,12 @@ class Settings extends Model
     /**
      * Check if IP matches a pattern (single IP or CIDR range)
      */
-    private function matchesIpPattern($ip, $pattern)
+    public function matchesIpPattern($ip, $pattern)
     {
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+            return false;
+        }
+
         // Direct match
         if ($ip === $pattern) {
             return true;
@@ -111,6 +128,10 @@ class Settings extends Model
      */
     private function matchesCidrIPv4($ip, $range, $netmask)
     {
+        if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            return false;
+        }
+
         $ipLong = ip2long($ip);
         $rangeLong = ip2long($range);
         $mask = -1 << (32 - (int)$netmask);
@@ -126,7 +147,7 @@ class Settings extends Model
         $ipBin = inet_pton($ip);
         $rangeBin = inet_pton($range);
 
-        if ($ipBin === false || $rangeBin === false) {
+        if ($ipBin === false || $rangeBin === false || strlen($ipBin) !== strlen($rangeBin)) {
             return false;
         }
 

@@ -1,6 +1,7 @@
 <?php namespace Key\Whitelist\Middleware;
 
 use Closure;
+use Key\Whitelist\Classes\ClientIp;
 use Key\Whitelist\Models\Settings;
 use Key\Whitelist\Models\EmergencyAccess;
 use Illuminate\Http\Request;
@@ -29,9 +30,8 @@ class WhitelistMiddleware
             // Only apply to backend routes if entire site protection is disabled
             // Try environment variable first, then config, then default
             $backendUri = env('BACKEND_URI') ?: Config::get('cms.backendUri', '/backend');
-            $requestPath = '/' . ltrim($request->getPathInfo(), '/');
 
-            if (strpos($requestPath, $backendUri) !== 0) {
+            if (!$this->isBackendPath($request, $backendUri)) {
                 return $next($request);
             }
         }
@@ -42,7 +42,7 @@ class WhitelistMiddleware
         }
 
         // Get client IP address
-        $clientIp = $this->getClientIpAddress($request);
+        $clientIp = ClientIp::resolve($request, $settings);
 
         // Check if IP has approved emergency access
         if (EmergencyAccess::hasApprovedAccess($clientIp)) {
@@ -82,45 +82,17 @@ class WhitelistMiddleware
     }
 
     /**
-     * Get the real client IP address, considering proxies and load balancers
+     * isBackendPath compares the decoded request path with the backend URI per
+     * path segment, so percent-encoded (/%62ackend), differently cased or
+     * double-slashed paths cannot skip the check.
      */
-    private function getClientIpAddress(Request $request)
+    private function isBackendPath(Request $request, string $backendUri): bool
     {
-        // Check for IPs in order of priority
-        $ipSources = [
-            'HTTP_CF_CONNECTING_IP',     // Cloudflare
-            'HTTP_X_REAL_IP',           // Nginx proxy
-            'HTTP_X_FORWARDED_FOR',     // Standard forwarded header
-            'HTTP_X_FORWARDED',         // Alternative
-            'HTTP_FORWARDED_FOR',       // Alternative
-            'HTTP_FORWARDED',           // Alternative
-            'HTTP_CLIENT_IP',           // Proxy
-            'REMOTE_ADDR'               // Standard
-        ];
+        $backendUri = '/' . strtolower(trim($backendUri, '/'));
+        $requestPath = rawurldecode($request->getPathInfo());
+        $requestPath = '/' . strtolower(ltrim(preg_replace('#/+#', '/', $requestPath), '/'));
 
-        foreach ($ipSources as $source) {
-            if (!empty($_SERVER[$source])) {
-                $ip = $_SERVER[$source];
-
-                // Handle comma-separated IPs (X-Forwarded-For can contain multiple IPs)
-                if (strpos($ip, ',') !== false) {
-                    $ip = trim(explode(',', $ip)[0]);
-                }
-
-                // Validate IP address
-                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-                    return $ip;
-                }
-
-                // Also allow private range IPs for local development
-                if (filter_var($ip, FILTER_VALIDATE_IP)) {
-                    return $ip;
-                }
-            }
-        }
-
-        // Fallback to Laravel's method
-        return $request->ip();
+        return $requestPath === $backendUri || str_starts_with($requestPath, rtrim($backendUri, '/') . '/');
     }
 
     /**

@@ -38,7 +38,16 @@ tabs:
             label: key.whitelist::lang.fields.allow_localhost.label
             comment: key.whitelist::lang.fields.allow_localhost.comment
             type: switch
-            default: 1
+            default: 0
+            tab: key.whitelist::lang.tabs.general
+
+        trusted_proxies:
+            span: full
+            label: key.whitelist::lang.fields.trusted_proxies.label
+            comment: key.whitelist::lang.fields.trusted_proxies.comment
+            type: codeeditor
+            language: text
+            size: small
             tab: key.whitelist::lang.tabs.general
 
         log_blocked_attempts:

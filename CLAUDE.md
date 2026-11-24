@@ -37,7 +37,7 @@ php artisan cache:clear
 - Checks if plugin is enabled/disabled via PluginManager
 - Determines whether to protect entire site or just backend based on `protect_entire_site` setting
 - Checks for approved emergency access tokens before blocking
-- Extracts client IP from various proxy headers (Cloudflare, Nginx, X-Forwarded-For, etc.)
+- Resolves the client IP via `Classes\ClientIp` (forwarding headers only from trusted proxies)
 - Delegates IP validation to Settings model
 - Returns 403 response with custom blocked view if IP not whitelisted
 - Conditionally shows emergency access button (if enabled and no pending request)
@@ -48,7 +48,7 @@ php artisan cache:clear
 - Provides `getWhitelistedIps()` to parse newline-separated IP list
 - Provides `isIpWhitelisted($ip)` with logic for:
   - Returning true if whitelist disabled
-  - Always allowing localhost IPs (127.0.0.1, ::1) if `allow_localhost` enabled
+  - Allowing localhost IPs (127.0.0.1, ::1) if `allow_localhost` enabled (off by default)
   - Returning true if no IPs configured (failsafe)
   - Checking IP against whitelist using CIDR matching
 - Implements IPv4 and IPv6 CIDR range matching algorithms

@@ -2,6 +2,7 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use Key\Whitelist\Classes\ClientIp;
 use Key\Whitelist\Models\EmergencyAccess as EmergencyAccessModel;
 use Key\Whitelist\Models\Settings;
 use Flash;
@@ -90,29 +91,11 @@ class EmergencyAccess extends Controller
     }
 
     /**
-     * Get client IP address
+     * Get client IP address (same resolution as the whitelist middleware)
      */
     protected function getClientIp(): string
     {
-        $headers = [
-            'HTTP_CF_CONNECTING_IP',
-            'HTTP_X_REAL_IP',
-            'HTTP_X_FORWARDED_FOR',
-            'HTTP_CLIENT_IP',
-            'REMOTE_ADDR',
-        ];
-
-        foreach ($headers as $header) {
-            if ($ip = Request::server($header)) {
-                // Handle X-Forwarded-For which can contain multiple IPs
-                if (strpos($ip, ',') !== false) {
-                    $ip = trim(explode(',', $ip)[0]);
-                }
-                return $ip;
-            }
-        }
-
-        return Request::ip();
+        return ClientIp::resolve(Request::instance());
     }
 
     /**

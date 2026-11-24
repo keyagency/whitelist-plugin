@@ -33,7 +33,11 @@ return [
         ],
         'allow_localhost' => [
             'label' => 'Always Allow Localhost',
-            'comment' => 'Always allow access from localhost (127.0.0.1, ::1) even when whitelist is enabled',
+            'comment' => 'Always allow access from localhost (127.0.0.1, ::1) even when the whitelist is enabled. Leave this off when a reverse proxy or cache on the same server forwards requests.',
+        ],
+        'trusted_proxies' => [
+            'label' => 'Trusted Proxies',
+            'comment' => 'IP addresses or CIDR ranges of your own proxies, load balancers or CDN (e.g. Cloudflare ranges), one per line. Only for requests from these addresses is the client IP read from X-Forwarded-For. Leave empty when visitors connect to this server directly: forwarding headers are then ignored, because anyone can set them.',
         ],
         'log_blocked_attempts' => [
             'label' => 'Log Blocked Attempts',

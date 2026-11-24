@@ -33,7 +33,11 @@ return [
         ],
         'allow_localhost' => [
             'label' => 'Sta Localhost Altijd Toe',
-            'comment' => 'Sta altijd toegang toe vanaf localhost (127.0.0.1, ::1), zelfs wanneer whitelist is ingeschakeld',
+            'comment' => 'Sta altijd toegang toe vanaf localhost (127.0.0.1, ::1), ook als de whitelist aanstaat. Laat dit uit als een reverse proxy of cache op dezelfde server verzoeken doorstuurt.',
+        ],
+        'trusted_proxies' => [
+            'label' => 'Vertrouwde proxy\'s',
+            'comment' => 'IP-adressen of CIDR-ranges van je eigen proxy\'s, load balancers of CDN (bijv. de Cloudflare-ranges), één per regel. Alleen bij verzoeken vanaf deze adressen wordt het IP van de bezoeker uit X-Forwarded-For gelezen. Laat leeg als bezoekers rechtstreeks met deze server verbinden: doorstuur-headers worden dan genegeerd, omdat iedereen ze kan meesturen.',
         ],
         'log_blocked_attempts' => [
             'label' => 'Log Geblokkeerde Pogingen',
